@@ -127,34 +127,6 @@ def makeRoll(betType, betChoice, betAmount, bankRoll):
         else:
             print('Error: You have picked an incorrect bet. Acceptable bets are Odd or Even.')
             return(bankRoll)
-    
-    #   Begin an groups game
-    elif betType == 'Groups':
-        if betChoice == 'First' or betChoice == 'Second' or betChoice == 'Third':
-            theRoll = rollTheRouletteWheel()
-            groupResult = checkGroup(theRoll)
-            print('You bet the ball would land in the ' + betChoice + ' group.')
-
-            if groupResult  == betChoice:
-                print('*** You are a winner! ***')
-                print('The payout is 2 to 1')
-                payout = 2.0*float(betAmount)
-                bankRoll = float(bankRoll) + payout
-                print(str(payout)+' has been added to your account')
-                print('Your new account balance is '+str(bankRoll))
-                print('*** Please roll again! ***')
-                return(bankRoll)
-            else:
-                print('You have lost')
-                bankRoll = float(bankRoll) - float(betAmount)
-                print('Your bet of '+str(betAmount)+' has been removed from your account')
-                print('Your new account balance is '+str(bankRoll))
-                print('--- Please roll again! ---')
-                return(bankRoll)
-        else:
-            print('Error: You have picked an incorrect bet. Acceptable bets are First, Second, or Third.')
-            return(bankRoll)
-            
 
     #    You have chosen an incorrect betting game type            
     else:
