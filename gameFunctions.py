@@ -6,6 +6,8 @@ red = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36]
 first = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 second = [13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 third = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
+low = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+high = [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36]
 
 #   determine if the roll was odd or even
 def checkEvenOrOdd(rollResult):
@@ -35,6 +37,16 @@ def checkGroup(rollResult):
         return('Second')
     elif rollResult in third:
         return('Third')
+    #   if the roll wasn't in a group it landed on 0, or 00
+    else:
+        return(rollResult)
+    
+#   determine if the roll was low or high
+def checkLowHigh(rollResult):
+    if rollResult in low:
+        return('Low')
+    elif rollResult in high:
+        return('High')
     #   if the roll wasn't in a group it landed on 0, or 00
     else:
         return(rollResult)
@@ -139,6 +151,33 @@ def makeRoll(betType, betChoice, betAmount, bankRoll):
                 print('*** You are a winner! ***')
                 print('The payout is 2 to 1')
                 payout = 2.0*float(betAmount)
+                bankRoll = float(bankRoll) + payout
+                print(str(payout)+' has been added to your account')
+                print('Your new account balance is '+str(bankRoll))
+                print('*** Please roll again! ***')
+                return(bankRoll)
+            else:
+                print('You have lost')
+                bankRoll = float(bankRoll) - float(betAmount)
+                print('Your bet of '+str(betAmount)+' has been removed from your account')
+                print('Your new account balance is '+str(bankRoll))
+                print('--- Please roll again! ---')
+                return(bankRoll)
+        else:
+            print('Error: You have picked an incorrect bet. Acceptable bets are First, Second, or Third.')
+            return(bankRoll)
+        
+        #   Begin an lowHigh game
+    elif betType == 'LowHigh':
+        if betChoice == 'Low' or betChoice == 'High':
+            theRoll = rollTheRouletteWheel()
+            lowHighResult = checkLowHigh(theRoll)
+            print('You bet the ball would land in the ' + betChoice + ' group.')
+
+            if lowHighResult  == betChoice:
+                print('*** You are a winner! ***')
+                print('The payout is 1 to 1')
+                payout = 1.0*float(betAmount)
                 bankRoll = float(bankRoll) + payout
                 print(str(payout)+' has been added to your account')
                 print('Your new account balance is '+str(bankRoll))

@@ -24,8 +24,6 @@ def placeBet(prevBankRoll=None):
             print('You have made an incorrect entry. Please enter a number greater than 0')
             bankRoll = 0
             placeBet(None)
-    elif bankRoll == "Exit":
-        quit()
     else:
         bankRoll = prevBankRoll
     
@@ -46,7 +44,7 @@ def placeBet(prevBankRoll=None):
     if float(bankRoll) - float(betAmount) < 0.0:
         print('You do not have enough money in your bank account to bet this much.')
         placeBet(bankRoll)
-    print('Bet type options "Number", "EvenOrOdd", "RedOrBlack", "Groups"')
+    print('Bet type options "Number", "EvenOrOdd", "RedOrBlack", "Groups", or "LowHigh"')
     betType = input('Please enter a bet type or "Exit" to quit: ')
     if betType == "Number":
         betChoice = input("Please enter a number between -1 (00) and 36: ")
@@ -59,6 +57,9 @@ def placeBet(prevBankRoll=None):
         return(betType, betChoice, betAmount, bankRoll)
     elif betType == "Groups":
         betChoice = input('Please enter "First" for 1-12, "Second" for 13-24, or "Third" for 25-36: ')
+        return(betType, betChoice, betAmount, bankRoll)
+    elif betType == "LowHigh":
+        betChoice = input('Please enter "Low" for 1-18 or "High" for 19-36: ')
         return(betType, betChoice, betAmount, bankRoll)
     elif betType == "Exit":
         quit()
